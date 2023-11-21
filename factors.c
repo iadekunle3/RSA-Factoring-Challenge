@@ -29,14 +29,14 @@ uint64_t pollards_rho(uint64_t n) {
 void factorize(uint64_t n) {
 	if (n == 1) return;
 	if (n % 2 == 0) {
-		printf("%" PRIu64 "=%" PRIu64 "*%" PRIu64 "\n", n, 2ULL, n / 2);
+		fprintf(stdout, "%" PRIu64 "=%" PRIu64 "*%" PRIu64 "\n", n, (uint64_t)2, n / 2);
 		return;
 	}
 	uint64_t divisor = pollards_rho(n);
 	if (divisor == n) {
-		printf("%" PRIu64 "=%" PRIu64 "*%" PRIu64 "\n", n, 1ULL, n);
+		fprintf(stdout, "%" PRIu64 "=%" PRIu64 "*%" PRIu64 "\n", n, (uint64_t)1, n);
 	} else {
-		printf("%" PRIu64 "=%" PRIu64 "*%" PRIu64 "\n", n, divisor, n / divisor);
+		fprintf(stdout, "%" PRIu64 "=%" PRIu64 "*%" PRIu64 "\n", n, divisor, n / divisor);
 	}
 }
 

@@ -2,21 +2,21 @@
 #include <stdlib.h>
 #include <inttypes.h>
 
-uint64_t gcd(uint64_t a, uint64_t b) {
+long long unsigned int gcd(long long unsigned int a, long long unsigned int b) {
 	while (b != 0) {
-		uint64_t t = b;
+		long long unsigned int t = b;
 		b = a % b;
 		a = t;
 	}
 	return a;
 }
 
-uint64_t pollards_rho(uint64_t n) {
+long long unsigned int pollards_rho(long long unsigned int n) {
 	if (n % 2 == 0) return 2;
-	uint64_t x = rand() % (n - 2) + 2;
-	uint64_t y = x;
-	uint64_t c = rand() % (n - 1) + 1;
-	uint64_t d = 1;
+	long long unsigned int x = rand() % (n - 2) + 2;
+	long long unsigned int y = x;
+	long long unsigned int c = rand() % (n - 1) + 1;
+	long long unsigned int d = 1;
 	while (d == 1) {
 		x = (x * x + c + n) % n;
 		y = (y * y + c + n) % n;
@@ -26,15 +26,15 @@ uint64_t pollards_rho(uint64_t n) {
 	return d;
 }
 
-void factorize(uint64_t n) {
+void factorize(long long unsigned int n) {
 	if (n == 1) return;
 	if (n % 2 == 0) {
-		fprintf(stdout, "%" PRIu64 "=%" PRIu64 "*%" PRIu64 "\n", n, (uint64_t)2, n / 2);
+		fprintf(stdout, "%" PRIu64 "=%" PRIu64 "*%" PRIu64 "\n", n, (long long unsigned int)2, n / 2);
 		return;
 	}
-	uint64_t divisor = pollards_rho(n);
+	long long unsigned int divisor = pollards_rho(n);
 	if (divisor == n) {
-		fprintf(stdout, "%" PRIu64 "=%" PRIu64 "*%" PRIu64 "\n", n, (uint64_t)1, n);
+		fprintf(stdout, "%" PRIu64 "=%" PRIu64 "*%" PRIu64 "\n", n, (long long unsigned int)1, n);
 	} else {
 		fprintf(stdout, "%" PRIu64 "=%" PRIu64 "*%" PRIu64 "\n", n, divisor, n / divisor);
 	}
@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
 		return 1;
 	}
 
-	uint64_t n;
+	long long unsigned int n;
 	while (fscanf(file, "%" SCNu64, &n) == 1) {
 		factorize(n);
 	}
